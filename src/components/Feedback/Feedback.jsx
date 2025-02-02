@@ -1,1 +1,1 @@
-export default function FeedBack() {}
+export default function Feedback() {}
