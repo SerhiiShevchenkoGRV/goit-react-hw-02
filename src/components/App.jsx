@@ -32,7 +32,7 @@ export default function App() {
   };
 
   const handleReset = () => {
-    setVotes({ ...initialVotes });
+    setVotes({ good: 0, neutral: 0, bad: 0 });
   };
 
   const optionsProps = { votes, updateFeedback, handleReset, totalFeedback };
