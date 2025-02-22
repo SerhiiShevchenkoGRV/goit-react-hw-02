@@ -1,6 +1,7 @@
 import Description from "./Description/Description";
 import Options from "./Options/Options";
 import Feedback from "./Feedback/Feedback";
+import Notification from "./Notification/Notification";
 import { useState, useEffect } from "react";
 
 export default function App() {
@@ -24,6 +25,7 @@ export default function App() {
   }, [votes]);
 
   const totalFeedback = votes.good + votes.neutral + votes.bad;
+  const positiveFeedback = Math.round((votes.good / totalFeedback) * 100);
 
   const updateFeedback = (feedbackType) => {
     setVotes((prev) => ({ ...prev, [feedbackType]: prev[feedbackType] + 1 }));
@@ -34,13 +36,13 @@ export default function App() {
   };
 
   const optionsProps = { votes, updateFeedback, handleReset, totalFeedback };
-  const feedbackProps = { votes, totalFeedback };
+  const feedbackProps = { votes, totalFeedback, positiveFeedback };
 
   return (
     <div className="appContainer">
       <Description />
       <Options {...optionsProps} />
-      <Feedback {...feedbackProps} />
+      {totalFeedback > 0 ? <Feedback {...feedbackProps} /> : <Notification />}
     </div>
   );
 }
